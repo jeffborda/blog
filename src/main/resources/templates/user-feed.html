@@ -9,6 +9,12 @@
 <body>
     <nav th:replace="fragments/common :: nav"></nav>
 
+    <div th:if="${followingNone}">
+        <p>Your feed is empty.</p>
+        <p>Once you have followed other users, their blog posts will appear here.</p>
+        <p>To follow other users, go to the <a href="/users/all">user directory</a>.</p>
+    </div>
+
     <ul th:each="followingUser : ${loggedInUser.following}">
         <li th:text="${followingUser.username}"></li>
         <ul th:each="blogPost : ${followingUser.blogPosts}">

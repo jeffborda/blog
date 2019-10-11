@@ -11,6 +11,10 @@
     <nav th:replace="fragments/common :: nav"></nav>
     <h1>Login</h1>
 
+    <div th:if="${param.error}">
+        <p>Could not recognize that username or password. Please try again.</p>
+    </div>
+
     <form action="/login" method="POST">
         <label for="username">Username</label>
         <input id="username" name="username" />
