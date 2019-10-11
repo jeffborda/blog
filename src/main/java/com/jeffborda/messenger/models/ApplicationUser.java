@@ -52,7 +52,13 @@ public class ApplicationUser implements UserDetails {
     }
 
     public void addUserToFollow(ApplicationUser u) {
+
         following.add(u);
+    }
+
+    public void removeUserToFollow(ApplicationUser u) {
+
+        following.remove(u);
     }
 
     //Implement these automatically, then change return statements

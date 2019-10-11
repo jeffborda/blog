@@ -35,14 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable() /*cross site request forgery (may not work w/ loc host */
                     .cors().disable() /*cross origin resource sharing */
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.GET, "/").permitAll() /* users allowed w/o logging in */
+                    .antMatchers(HttpMethod.GET, "/", "/login", "login/username-taken", "/*.css").permitAll() /* users allowed w/o logging in */
                     .antMatchers(HttpMethod.POST, "/signup").permitAll() /* GRANT ACCESS!! */
-                    .anyRequest().permitAll() /* Can be locked down further with '.authorize()' */
+                    .anyRequest().authenticated() /* Can be opened up with '.permitAll()' */
                 .and()
                     .formLogin()
                     .loginPage("/login") /* specifies we've made our own login page @/login */
-                    .defaultSuccessUrl("/") /* where they are sent with successful login */
-                    .failureUrl("/login/failure") /* failed login redirect */
+                    .defaultSuccessUrl("/my-profile") /* where they are sent with successful login */
+//                    .failureUrl("/login") /* failed login redirect */
                 .and()
                     .logout()
                     .logoutUrl("/logout") /* route to logout users - no controller required */
