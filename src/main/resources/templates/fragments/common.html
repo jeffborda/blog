@@ -1,0 +1,9 @@
+<nav th:fragment="nav">
+    <a href="/">Home</a>
+    <a th:if="${username}" href="/my-profile">[[${username}]]'s Profile</a>
+    <a th:if="${username}" href="/my-profile/feed">My Feed</a>
+    <a th:if="${username}" href="/users/all">User Directory</a>
+    <a th:unless="${username}" href="/signup">Sign Up</a> <!-- This could possibly remove 'th:unless="${username}"' to enable registration on a logged in user -->
+    <a th:unless="${username}" href="/login">Log In</a>
+    <a th:if="${username}" href="/logout">Log Out</a>
+</nav>

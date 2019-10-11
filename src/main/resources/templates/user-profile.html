@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>[[${username}]] Profile</title>
+</head>
+<body>
+    <nav th:replace="fragments/common :: nav"></nav>
+    <h1>[[${username}]]'s Profile</h1>
+
+    <form method="POST" action="/blogpost">
+        <label for="post_body">Your post:</label>
+        <input id="post_body" name="post_body" type="text" />
+        <input type="submit" value="Submit"/>
+    </form>
+
+
+    <h2>[[${username}]]'s Posts</h2>
+    <ul th:each="post : ${user.blogPosts}">
+        <li>[[${post}]]</li>
+    </ul>
+
+</body>
+</html>
