@@ -46,3 +46,11 @@ My Messenger is simple blogging app written using the Spring framework. It has b
 - Ability for users to write a bio
 - Ability for users to enter their birthday
 - Ability for users to create various blog post pages by topic, instead of posting to profile page
+
+## How to Use
+
+1. Clone repo from github.
+2. Open `application.properties`
+3. Set environmental variables in `application properties` as required for your machine
+4. Run using CLI command: `gradlew bootRun`
+5. Open your web browser, go to address: `localhost:8080`
