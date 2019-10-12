@@ -54,3 +54,8 @@ My Messenger is simple blogging app written using the Spring framework. It has b
 3. Set environmental variables in `application properties` as required for your machine
 4. Run using CLI command: `gradlew bootRun`
 5. Open your web browser, go to address: `localhost:8080`
+
+## References
+
+- [Meyer Web CSS Reset](https://meyerweb.com/eric/tools/css/reset/)
+- [Hover Dropdown Menu on Feed Page](https://www.w3schools.com/howto/howto_css_dropdown.asp)

@@ -1,6 +1,7 @@
 package com.jeffborda.messenger.models;
 
 import javax.persistence.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class BlogPost {
 
     public BlogPost(String body, ApplicationUser user) {
         this.body = body;
-        this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        this.timestamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
         this.user = user;
     }
 
@@ -34,6 +35,10 @@ public class BlogPost {
         return timestamp;
     }
 
+    public Date getTimestampConvertedToDate() throws ParseException {
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(this.timestamp);
+    }
+
     public long getId() {
         return id;
     }
@@ -44,6 +49,6 @@ public class BlogPost {
 
     @Override
     public String toString() {
-        return String.format("Posted on: %s.  %s", this.timestamp, this.body);
+        return String.format("[%s]  %s", this.timestamp, this.body);
     }
 }
