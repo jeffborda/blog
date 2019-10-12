@@ -38,7 +38,7 @@ public class ApplicationUserController {
         return "user-profile";
     }
 
-    @PostMapping("/blogpost")
+    @PostMapping("/my-profile/blogpost")
     public RedirectView addBlogPost(Principal p, String post_body) {
         ApplicationUser user = applicationUserRepo.findUserByUsername(p.getName());
         BlogPost blogPost = new BlogPost(post_body, user);
