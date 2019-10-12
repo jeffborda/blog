@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable() /*cross site request forgery (may not work w/ loc host */
                     .cors().disable() /*cross origin resource sharing */
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.GET, "/", "/login", "login/username-taken", "/*.css").permitAll() /* users allowed w/o logging in */
+                    .antMatchers(HttpMethod.GET, "/", "/login", "/login/username-taken", "/*.css").permitAll() /* users allowed w/o logging in */
                     .antMatchers(HttpMethod.POST, "/signup").permitAll() /* GRANT ACCESS!! */
                     .anyRequest().authenticated() /* Can be opened up with '.permitAll()' */
                 .and()

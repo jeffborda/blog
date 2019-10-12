@@ -11,9 +11,11 @@
     <nav th:replace="fragments/common :: nav"></nav>
     <h1>Welcome to My Messenger [[${username}]]</h1>
 
+    <p>My Messenger is a simple blogging app. You may write blog posts from your profile page for other users to read. Other users can be found in the directory. Follow other users to have their blog posts appear in your feed.</p>
+
 
     <div th:unless="${username}" >
-        <h2>Sign Up Here</h2>
+        <h2>New Users Sign Up Here</h2>
         <form action="/signup" method="POST">
             <label for="username">Username</label>
             <input id="username" name="username" type="text" required />

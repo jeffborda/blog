@@ -12,12 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
-
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -42,15 +42,12 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public RedirectView createNewUser(String username, String password) throws Exception {
+    public RedirectView createNewUser(String username, String password) {
         ApplicationUser newUser = new ApplicationUser(username, passwordEncoder.encode(password));
-
         List<ApplicationUser> currentUsers = applicationUserRepo.findAll();
-        Set<String> uniqueUsernames = new HashSet<>();
-        for(ApplicationUser user : currentUsers) {
-            uniqueUsernames.add(user.getUsername());
-        }
-        if(uniqueUsernames.contains(newUser.getUsername())) {
+        Set<String> currentUsernames = currentUsers.stream().map(user -> user.getUsername()).collect(Collectors.toSet());
+
+        if(currentUsernames.contains(newUser.getUsername())) {
             return new RedirectView("/login/username-taken");
         }
         else {
@@ -81,11 +78,4 @@ public class HomeController {
         return "login";
     }
 
-    //    @GetMapping("/login/failure")
-//    public String getLoginFailure(Principal p, Model m) {
-//        if(p != null) {
-//            m.addAttribute("username", p.getName());
-//        }
-//        return "login-failure";
-//    }
 }
