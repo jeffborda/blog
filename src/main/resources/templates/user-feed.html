@@ -15,6 +15,20 @@
         <p>To follow other users, go to the <a href="/users/all">user directory</a>.</p>
     </div>
 
+    <!-- This dropdown is intended to add the ability to change the display preferences of the user's feed page (i.e. sort by user, post date, etc)-->
+    <!-- RE: https://www.w3schools.com/howto/howto_css_dropdown.asp -->
+    <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+            <a href="/feed">Sort by Username</a>
+            <a href="/feed/ascending">Sort by date posted (ascending)</a>
+            <a href="/feed/descending">Sort by date posted (descending)</a>
+        </div>
+    </div>
+
+
+    <!-- For dropdown to work, add an enum for display type, pass that into this fragment, render the page based on the enum value -->
+    <!-- The following would be for the default enum type SortBy.USERNAME -->
     <ul th:each="followingUser : ${loggedInUser.following}">
         <li th:text="${followingUser.username}"></li>
         <ul th:each="blogPost : ${followingUser.blogPosts}">
