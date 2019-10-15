@@ -44,19 +44,19 @@ public class HomeController {
     @PostMapping("/signup")
     public RedirectView createNewUser(String username, String password) {
         ApplicationUser newUser = new ApplicationUser(username, passwordEncoder.encode(password));
-        List<ApplicationUser> currentUsers = applicationUserRepo.findAll();
-        Set<String> currentUsernames = currentUsers.stream().map(user -> user.getUsername()).collect(Collectors.toSet());
-
-        if(currentUsernames.contains(newUser.getUsername())) {
-            return new RedirectView("/login/username-taken");
+        // This is a more efficient way to check if the username is already taken, use SQL:
+        ApplicationUser usernameUniqueIfNull = applicationUserRepo.findUserByUsername(username);
+        if(usernameUniqueIfNull == null) {
+            // Save the new username
+            applicationUserRepo.save(newUser);
+            // Automatically log user in after registering:
+            Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         else {
-            applicationUserRepo.save(newUser);
+            return new RedirectView("/login/username-taken");
         }
-        // To automatically log user in when registering
-        Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
+        // User sent to their profile page after registering for the first time
         return new RedirectView("/my-profile");
     }
 
